@@ -1,5 +1,5 @@
 import sqlite3
-
+<<<<<<< HEAD
 
 # Opprett forbindelse til database (fil blir laget automatisk)
 conn = sqlite3.connect("data/stps.db")
@@ -13,7 +13,7 @@ with open("database/schema.sql", "r") as f:
 conn.commit()
 
 print("Database opprettet!")
-
+=======
 import os
 
 # --- Paths ---
@@ -425,35 +425,4 @@ with pd.ExcelWriter("tippelag.xlsx", engine="openpyxl") as writer:
     )
 
     df_hist.to_excel(writer, sheet_name="Historikk", index=False)
-
-    import pandas as pd
-
-with pd.ExcelWriter("tippelag.xlsx", engine="openpyxl") as writer:
-
-    # --- SAMMENLAGT ---
-    df_total.to_excel(writer, sheet_name="Sammenlagt", index=False)
-
-    # --- HISTORIKK ---
-    cursor.execute("""
-    SELECT 
-        p.name,
-        w.week_number,
-        r.total_points,
-        r.correct
-    FROM weekly_results r
-    JOIN players p ON r.player_id = p.id
-    JOIN weeks w ON r.week_id = w.id
-    ORDER BY p.name, w.week_number
-    """)
-    
-    rows = cursor.fetchall()
-
-    df_hist = pd.DataFrame(rows, columns=["Navn", "Uke", "Poeng", "Rette"])
-    df_hist.to_excel(writer, sheet_name="Historikk", index=False)
-
-    # --- ÉN FANE PER SPILLER ---
-    for player in df_hist["Navn"].unique():
-        df_player = df_hist[df_hist["Navn"] == player]
-        df_player.to_excel(writer, sheet_name=player, index=False)
-
-print("✅ Excel med flere ark laget!")
+>>>>>>> 72f8553 (lagrer alt før pull)
